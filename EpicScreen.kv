@@ -1,0 +1,18 @@
+<EpicScreen>
+    name: "epic"
+    FloatLayout:
+        size_hint: None, None
+    DPEAButton:
+        text: "test2"
+        size: 100, 100
+        x: root.width * 0.25
+        y:root.height * 0.5
+        color: 1, 0, 0, 1
+        on_press: root.step()
+    DPEAButton:
+        text: "Change direction"
+        size: 100, 100
+        x: root.width * 0.6
+        y:root.height * 0.5
+        color: 1, 0, 0, 1
+        on_press: root.direction()
