@@ -3,7 +3,8 @@
     FloatLayout:
         size_hint: None, None
     DPEAButton:
-        text: "test2"
+        id: rie
+        text: "Off"
         size: 100, 100
         x: root.width * 0.25
         y:root.height * 0.5
@@ -16,3 +17,23 @@
         y:root.height * 0.5
         color: 1, 0, 0, 1
         on_press: root.direction()
+    DPEAButton:
+        text: "Run thing"
+        size: 100, 100
+        x: root.width * 0.2
+        y:root.height * 0.7
+        color: 1, 0, 0, 1
+        on_press: root.hardcoded()
+    Slider:
+        id: riseup
+        size_hint_y: .4
+        size_hint_x: .2
+        x: root.width * 0
+        y:root.height * 0
+        min: 0
+        max: 1250
+        on_touch_move: root.eee()
+    Label:
+        x: root.width * -.4
+        y: root.height * -.35
+        text: "Speed"

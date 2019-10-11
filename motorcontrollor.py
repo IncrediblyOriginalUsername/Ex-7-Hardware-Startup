@@ -5,9 +5,10 @@ from pidev.MixPanel import MixPanel
 from kivy.app import App
 from pidev.stepper import stepper
 from kivy.lang import Builder
-
+from time import sleep
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
+from kivy.uix import slider
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 SCREEN_MANAGER = ScreenManager()
@@ -32,6 +33,8 @@ class ProjectNameGUI(App):
 class EpicScreen(Screen):
     global x
     global dir
+    global speed
+    speed = 0
     dir = 0
     x = True
     def __init__(self, **kwargs):
@@ -40,24 +43,57 @@ class EpicScreen(Screen):
         print("ayua")
         global x
         if(x == True):
-            s0.run(dir, 1000)
+            s0.run(dir, speed)
+            self.ids.rie.text = "On"
             x = False
         else:
-            s0.softFree()
+            print("freed")
+            self.ids.rie.text = "Off"
+            s0.softStop()
             x = True
     def direction(self):
         global dir
         global x
-        s0.softFree()
         if(dir == 0):
             dir = 1
             if(x == False):
-                s0.run(dir, 1000)
+                self.step()
+                self.step()
 
         else:
             dir = 0
             if (x == False):
-                s0.run(dir, 1000)
+                self.step()
+                self.step()
+    def eee(self):
+        global speed
+        speed = self.ids.riseup.value
+        if(x == False):
+            self.step()
+            self.step()
+    def hardcoded(self):
+        #self.ids.gamer.text = s0.get_position_in_units()
+        s0.set_speed(1)
+        s0.relative_move(15)
+        # self.ids.gamer.text = s0.get_position_in_units()
+        s0.stop()
+        sleep(10)
+        s0.set_speed(5)
+        # self.ids.gamer.text = s0.get_position_in_units()
+        s0.relative_move(10)
+        s0.stop()
+        sleep(8)
+        # self.ids.gamer.text = s0.get_position_in_units()
+        s0.goHome()
+        sleep(30)
+        # self.ids.gamer.text = s0.get_position_in_units()
+        s0.set_speed(8)
+        s0.relative_move(-100)
+        s0.stop()
+        # self.ids.gamer.text = s0.get_position_in_units()
+        sleep(10)
+        s0.goHome()
+        # self.ids.gamer.text = s0.get_position_in_units()
 
 
 Builder.load_file('EpicScreen.kv')
