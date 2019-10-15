@@ -57,13 +57,13 @@ class MainScreen(Screen):
         global x
         global s0
         if(onsetthing == False):
-            print("ayua")
+           # print("ayua")
             if(x == True):
                 s0.run(dir, speed)
                 self.ids.rie.text = "On"
                 x = False
             else:
-                print("freed")
+               # print("freed")
                 self.ids.rie.text = "Off"
                 s0.softFree()
                 x = True
@@ -103,15 +103,16 @@ class MainScreen(Screen):
         global onsetthing
         global b
         print("%d" % s0.get_position_in_units())
+        s0.stop()
         s0.set_speed(1)
         s0.relative_move(15)
-        self.ids.game.text = "%d" % s0.get_position_in_units()
+        self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("changed")
         s0.stop()
         sleep(10)
         s0.set_speed(5)
         s0.relative_move(10)
-        self.ids.game.text = "%d" % s0.get_position_in_units()
+        self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("changed")
         s0.stop()
         sleep(8)
@@ -119,11 +120,11 @@ class MainScreen(Screen):
         while (s0.is_busy() == True):
             a = 1
         sleep(30)
-        self.ids.game.text = "%d" % s0.get_position_in_units()
+        self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("right before fast")
         s0.set_speed(8)
         s0.relative_move(-100)
-        self.ids.game.text = "%d" % s0.get_position_in_units()
+        self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("changed")
         s0.stop()
         sleep(10)
@@ -131,7 +132,7 @@ class MainScreen(Screen):
         s0.goHome()
         while(s0.is_busy() == True):
             a = 1
-        self.ids.game.text = "%d" % s0.get_position_in_units()
+        self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("done")
         onsetthing = False
         self.ids.runn.text = "Run thing"
@@ -145,7 +146,7 @@ class MainScreen(Screen):
     def hardcoded(self):
         global onsetthing
         if(onsetthing == False):
-            self.ids.game.text = "%d"% s0.get_position_in_units()
+            self.ids.game.text = "Location in units during runthing: %d"% s0.get_position_in_units()
             Thread(target=self.egg).start()
             Thread.daemon = True
             onsetthing = True
