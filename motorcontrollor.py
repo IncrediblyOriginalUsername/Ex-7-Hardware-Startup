@@ -74,14 +74,12 @@ class MainScreen(Screen):
         if(onsetthing == False):
             if(dir == 0):
                 dir = 1
-                if(x == False):
-                    self.step()
-                    self.step()
+                self.step()
+                self.step()
             else:
                 dir = 0
-                if (x == False):
-                    self.step()
-                    self.step()
+                self.step()
+                self.step()
     def cleanup(self):
         s0.free_all()
         spi.close()
@@ -91,9 +89,8 @@ class MainScreen(Screen):
         global speed
         if(onsetthing == False):
             speed = self.ids.riseup.value
-            if(x == False):
-                self.step()
-                self.step()
+            self.step()
+            self.step()
     def egg(self):
         global onsetthing
         global b
@@ -101,7 +98,7 @@ class MainScreen(Screen):
         self.ids.direction.text = "Direction change locked for duration of run thing"
         self.ids.sped.text = "Speed changing locked during Runthing"
         self.ids.rie.text = "Motor locked during runthing"
-        self.ids.runn.text = "Runthing running"
+        self.ids.runn.text = "Cancel runthing"
         print("%d" % s0.get_position_in_units())
         s0.stop()
         if(canceled == True):
