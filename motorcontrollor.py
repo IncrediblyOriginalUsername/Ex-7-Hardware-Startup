@@ -162,6 +162,9 @@ class MainScreen(Screen):
             self.ids.rie.text = "Off"
         else:
             self.ids.rie.text = "On"
+            s0.set_speed_in_steps(speed)
+            self.step()
+            self.step()
 
     def hardcoded(self):
         global onsetthing
@@ -176,6 +179,7 @@ class MainScreen(Screen):
             onsetthing = True
         else:
             canceled = True
+            s0.softStop()
             s0.softFree()
             print("done")
             onsetthing = False
@@ -186,6 +190,8 @@ class MainScreen(Screen):
                 self.ids.rie.text = "Off"
             else:
                 self.ids.rie.text = "On"
+                sleep(.1)
+                #this sleep ensures the next steps run properally. without a break, for some reason the next step runs wrong
                 self.step()
                 self.step()
 
