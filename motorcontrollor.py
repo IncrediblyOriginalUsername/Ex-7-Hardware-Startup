@@ -59,6 +59,7 @@ class MainScreen(Screen):
         if(onsetthing == False):
            # print("ayua")
             if(x == True):
+                s0.set_speed_in_steps(speed)
                 s0.run(dir, speed)
                 self.ids.rie.text = "On"
                 x = False
@@ -67,8 +68,6 @@ class MainScreen(Screen):
                 self.ids.rie.text = "Off"
                 s0.softFree()
                 x = True
-        else:
-            self.ids.rie.text = "Motor locked during runthing"
     def direction(self):
         global dir
         global x
@@ -83,8 +82,6 @@ class MainScreen(Screen):
                 if (x == False):
                     self.step()
                     self.step()
-        else:
-            self.ids.direction.text = "Direction change locked for duration of run thing"
     def cleanup(self):
         s0.free_all()
         spi.close()
@@ -97,39 +94,62 @@ class MainScreen(Screen):
             if(x == False):
                 self.step()
                 self.step()
-        else:
-            self.ids.sped.text = "Speed changing locked during Runthing"
     def egg(self):
         global onsetthing
         global b
+        global canceled
+        self.ids.direction.text = "Direction change locked for duration of run thing"
+        self.ids.sped.text = "Speed changing locked during Runthing"
+        self.ids.rie.text = "Motor locked during runthing"
+        self.ids.runn.text = "Runthing running"
         print("%d" % s0.get_position_in_units())
         s0.stop()
+        if(canceled == True):
+            return
         s0.set_speed(1)
         s0.relative_move(15)
+        if (canceled == True):
+            return
         self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("changed")
         s0.stop()
         sleep(10)
+        if (canceled == True):
+            return
         s0.set_speed(5)
         s0.relative_move(10)
+        if (canceled == True):
+            return
         self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("changed")
         s0.stop()
         sleep(8)
+        if (canceled == True):
+            return
         s0.goHome()
+        if (canceled == True):
+            return
         while (s0.is_busy() == True):
             a = 1
         sleep(30)
+        if (canceled == True):
+            return
         self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("right before fast")
         s0.set_speed(8)
         s0.relative_move(-100)
+        if (canceled == True):
+            return
         self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
         print("changed")
         s0.stop()
         sleep(10)
+        if (canceled == True):
+            return
         print("should be 10 seconds here")
         s0.goHome()
+        if (canceled == True):
+            return
         while(s0.is_busy() == True):
             a = 1
         self.ids.game.text = "Location in units during runthing: %d" % s0.get_position_in_units()
@@ -145,13 +165,30 @@ class MainScreen(Screen):
 
     def hardcoded(self):
         global onsetthing
+        global canceled
+        global apple
         if(onsetthing == False):
             self.ids.game.text = "Location in units during runthing: %d"% s0.get_position_in_units()
-            Thread(target=self.egg).start()
-            Thread.daemon = True
+            canceled = False
+            apple = Thread(target=self.egg)
+            apple.daemon = True
+            apple.start()
             onsetthing = True
         else:
-            self.ids.runn.text = "Run thing cannot run again now"
+            canceled = True
+            s0.softFree()
+            print("done")
+            onsetthing = False
+            self.ids.runn.text = "Run thing"
+            self.ids.sped.text = "Speed"
+            self.ids.direction.text = "Change direction"
+            if (x == True):
+                self.ids.rie.text = "Off"
+            else:
+                self.ids.rie.text = "On"
+                self.step()
+                self.step()
+
     def admin_action(self):
         """
         Hidden admin button touch event. Transitions to passCodeScreen.
