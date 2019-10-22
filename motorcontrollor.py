@@ -178,7 +178,7 @@ class MainScreen(Screen):
             canceled = True
             s0.softStop()
             s0.softFree()
-            print("done")
+            print("donut")
             onsetthing = False
             self.ids.runn.text = "Run thing"
             self.ids.sped.text = "Speed"
