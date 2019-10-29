@@ -92,7 +92,7 @@ cyprus.close()
 from pidev.Cyprus_Commands import Cyprus_Commands_RPi as cyprus
 
 cyprus.initialize()
-if (cyprus.read_gpio() & 0b0001):    # binary bitwise AND of the value returned from read.gpio()
+if (cyprus.read_gpio() & 0b00`01):    # binary bitwise AND of the value returned from read.gpio()
     print("GPIO on port P6 is HIGH")
 elif (cyprus.read_gpio() & 0b0010):
     print("GPIO on port P7 is HIGH")

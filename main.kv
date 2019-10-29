@@ -5,20 +5,52 @@
 
     DPEAButton:
         id: test_button
-        text: 'test'
+        text: 'Toggle between 0 and 180 degrees(SERVO)'
         size: 100, 100
         x: root.width * 0.75
         y: root.height * 0.5
         color: 0, 1, 0, 1
         on_press: root.pressed()
-
     DPEAButton:
-        text: "test2"
+        id: test_butto
+        text: 'Run Motor controllor DC thing'
+        size: 100, 100
+        x: root.width * 0.1
+        y: root.height * 0.6
+        color: 0, 1, 0, 1
+        on_press: root.pressedF()
+    DPEAButton:
+        id: test_but
+        text: 'Run Motor controllor DC up speed overtime'
+        size: 100, 100
+        x: root.width * 0.1
+        y: root.height * 0.6
+        color: 0, 1, 0, 1
+        on_press: root.gamerrise()
+    DPEAButton:
+        text: "X"
+        font_size: 20
+        size: 60, 60
+        x: root.width * .96
+        y:root.height * .96
+        color: 1, 0, 0, 1
+        on_press: root.cleanup()
+    DPEAButton:
+        id:MyNameIsYoshikageKira
+        text: "Toggle servo switch control: OFF"
         size: 100, 100
         x: root.width * 0.25
         y:root.height * 0.5
         color: 1, 0, 0, 1
-        on_press: root.pressed()
+        on_press: root.presseds()
+    DPEAButton:
+        id:AAAA
+        text: "Toggle dc talon switch control: OFF"
+        size: 100, 100
+        x: root.width * 0.66
+        y:root.height * 0.77
+        color: 1, 0, 0, 1
+        on_press: root.presseda()
 
     ImageButton:
         id: logo_image_button
